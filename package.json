@@ -16,7 +16,12 @@
   "keywords": [],
   "author": "Berufsfachschule BBB, Baden, Switzerland <ict-berufe@bbbaden.ch>",
   "license": "MIT",
-  "description": "",
+  "description": "General purpose HTTP backend serving JSON for frontend development",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BBBaden/json-backend.git"
+  },
+  "homepage": "https://github.com/BBBaden/json-backend#readme",
   "dependencies": {
     "@tinyhttp/app": "^2.3.0",
     "@tinyhttp/cors": "^2.0.1",
