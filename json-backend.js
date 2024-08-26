@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // This file is part of json-backend.
 // Copyright (C) 2024 Berufsfachschule BBB, Baden, Switzerland.
 // Licensed under the MIT license. See LICENSE.md for details.
