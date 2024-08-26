@@ -2,7 +2,6 @@
   "name": "@bfsbbb/json-backend",
   "version": "1.0.0",
   "main": "json-backend.js",
-  "private": true,
   "type": "module",
   "bin": {
     "@bfsbbb/json-backend": "json-backend.js"
