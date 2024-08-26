@@ -1,0 +1,6 @@
+node_modules/
+
+accounts.json
+db.json
+*.env
+!example.env

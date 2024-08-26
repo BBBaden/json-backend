@@ -1,0 +1,7 @@
+{
+    "alice": {
+        "algo": "sha256",
+        "salt": "7xTI",
+        "hash": "cc4843c68a1244d8862c49c6037f5726805c2bf36b4e86e1c34d698d415cf256"
+    }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "@bfsbbb/json-backend",
+  "version": "1.0.0",
+  "main": "json-backend.js",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "@bfsbbb/json-backend": "json-backend.js"
+  },
+  "scripts": {
+    "dev": "node --env-file=dev.env json-backend.js | pino-pretty",
+    "lint": "eslint",
+    "start": "node --env-file=.env json-backend.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Berufsfachschule BBB, Baden, Switzerland <ict-berufe@bbbaden.ch>",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "@tinyhttp/app": "^2.3.0",
+    "@tinyhttp/cors": "^2.0.1",
+    "@tinyhttp/logger": "^2.0.0",
+    "chokidar": "^3.6.0",
+    "jsonwebtoken": "^9.0.2",
+    "milliparsec": "^3.0.0",
+    "pino": "^9.3.2",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "eslint": "^9.7.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.9.0",
+    "pino-pretty": "^11.2.2",
+    "prettier": "^3.3.3"
+  }
+}
