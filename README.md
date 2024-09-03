@@ -37,8 +37,8 @@ npx @bfsbbb/json-backend --accounts-file accounts.json
 
 
 # or
-# run the server with authentication and authorization
-npx @bfsbbb/json-backend --accounts-file accounts.json
+# run the server **without** authentication and authorization
+npx @bfsbbb/json-backend
 ```
 
 Now you can open http://localhost:3000/ and you should see a short description of the API.
