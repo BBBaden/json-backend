@@ -6,6 +6,46 @@ You might want to check out [json-server] instead, which has many more features,
 
 See the [CHANGELOG](./CHANGELOG.md) for an overview of releases and features.
 
+## Quickstart
+
+Here's a very terse guide for experienced and impatient users.
+
+**Prerequisite:** You have installed [Node.js].
+
+```sh
+# create npm project
+mkdir my-example-project
+cd my-example-project
+npm init -y
+
+# install json-backend as a development-dependency
+npm i -D @bfsbbb/json-backend
+
+# download example data file and name it db.json
+curl -o db.json https://raw.githubusercontent.com/BBBaden/json-backend/main/db.example.json
+
+# download example accounts file and name it accounts.json
+curl -o accounts.json https://raw.githubusercontent.com/BBBaden/json-backend/main/accounts.example.json
+
+# download api.http example file for tinkering
+curl -O https://raw.githubusercontent.com/BBBaden/json-backend/main/api.http
+
+
+# either
+# run the server with authentication and authorization
+npx @bfsbbb/json-backend --accounts-file accounts.json
+
+
+# or
+# run the server with authentication and authorization
+npx @bfsbbb/json-backend --accounts-file accounts.json
+```
+
+Now you can open http://localhost:3000/ and you should see a short description of the API.
+
+Also try opening this URL: http://localhost:3000/data/books/y2ww
+
+To stop the server, press <kbd>CTRL</kbd> + <kbd>C</kbd>.
 
 ## How to run it
 
