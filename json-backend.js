@@ -232,7 +232,10 @@ const checkAuthentication = (req, res) => {
 }
 
 const app = new App()
-app.use(logger()).use(cors()).use(json())
+app
+	.use(logger())
+	.use(cors({ allowedHeaders: ["content-type", "authorization"] }))
+	.use(json())
 if (USING_AUTH) {
 	app.use(async (req, res, next) => {
 		const hdr = req.headers["authorization"]
