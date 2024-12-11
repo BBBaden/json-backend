@@ -11,6 +11,7 @@ import { cors } from "@tinyhttp/cors"
 import { logger } from "@tinyhttp/logger"
 
 import { watch } from "chokidar"
+import { array, exact, inexact, nonEmptyString, record } from "decoders"
 import jwtLib from "jsonwebtoken"
 import { json } from "milliparsec"
 import pino from "pino"
@@ -109,6 +110,13 @@ const writeJsonFile = async (fname, data) => {
 	await fs.writeFile(fname, sData)
 }
 
+// dataOnDiskDecoder can verify, if the data on disk is in the correct format
+//
+// See `dataOnDiskToInternal` for details on the format.
+const dataOnDiskDecoder = record(
+	array(inexact({ id: nonEmptyString }).describe(""))
+)
+
 // dataOnDiskToInternal converts from on-disk format to internal format
 //
 // on disk: { "books": [ {"id": "abc", "title": "Cool book"} ]}
@@ -139,7 +147,13 @@ const dataInternalToOnDisk = (data) => {
 let __DATA = {}
 const readDataFromDisk = async () => {
 	LOGGER.debug(`reading data from disk`)
-	__DATA = dataOnDiskToInternal(await readJsonFile(APPCONFIG.dbFile))
+	const data = await readJsonFile(APPCONFIG.dbFile)
+	const result = dataOnDiskDecoder.decode(data)
+	if (!result.ok) {
+		LOGGER.error(`data file is malformed; internal data was not updated`)
+		return
+	}
+	__DATA = dataOnDiskToInternal(result.value)
 }
 const writeDataToDisk = async () => {
 	LOGGER.debug(`writing data to disk`)
@@ -153,9 +167,23 @@ watch(APPCONFIG.dbFile).on("change", async (_path, _stats) => {
 })
 
 let __ACCOUNTS = undefined
+// accountsOnDiskDecoder can verify, if the data in the accounts file is in the correct format.
+const accountsOnDiskDecoder = record(
+	exact({
+		algo: nonEmptyString,
+		salt: nonEmptyString,
+		hash: nonEmptyString,
+	})
+)
 const readAccountsFromDisk = async () => {
 	LOGGER.debug(`reading accounts from disk`)
-	__ACCOUNTS = await readJsonFile(APPCONFIG.accountsFile)
+	const data = await readJsonFile(APPCONFIG.accountsFile)
+	const result = accountsOnDiskDecoder.decode(data)
+	if (!result.ok) {
+		LOGGER.error(`accounts file is malformed; internal data was not updated`)
+		return
+	}
+	__ACCOUNTS = result.value
 }
 const writeAccountsToDisk = async () => {
 	LOGGER.debug(`writing accounts to disk`)
