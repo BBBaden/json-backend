@@ -73,7 +73,10 @@ const APPCONFIG = yargs(hideBin(process.argv))
 	})
 	.parseSync()
 
-const LOGGER = pino({ level: APPCONFIG.logLevel })
+const LOGGER = pino({
+	level: APPCONFIG.logLevel,
+	transport: { target: "pino-pretty" },
+})
 LOGGER.debug(
 	`json-backend started with these settings:\n${JSON.stringify(APPCONFIG, undefined, "  ")}`
 )
